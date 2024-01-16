@@ -117,7 +117,7 @@ landscape:
             logo: zig.svg
             crunchbase: https://www.crunchbase.com/organization/google
       - subcategory:
-        name: Runtimes
+        name: 运行时
         items:
           - item:
             name: Krustlet (Wasm)
@@ -206,7 +206,7 @@ landscape:
             logo: wazero.svg
             crunchbase: https://www.crunchbase.com/organization/tetrate
       - subcategory:
-        name: Application Frameworks
+        name: 编程框架
         items:
           - item:
             name: Ambient
@@ -303,7 +303,7 @@ landscape:
             logo: wasmer.svg
             crunchbase: https://www.crunchbase.com/organization/wasmer
       - subcategory:
-        name: Edge/Bare metal
+        name: 边缘计算
         items:
           - item:
             name: Flatcar Container Linux
@@ -330,7 +330,7 @@ landscape:
             logo: unikraft.svg
             crunchbase: https://www.crunchbase.com/organization/unikraft
       - subcategory:
-        name: AI/Machine Learning
+        name: 人工智能
         items:
           - item:
             name: Apache TVM
@@ -377,7 +377,7 @@ landscape:
             crunchbase: https://www.crunchbase.com/organization/w3c-e64a
             allow_duplicate_repo: true
       - subcategory:
-        name: Embedded Functions
+        name: 嵌入式
         items:
           - item:
             name: Dapr (Wasm)
@@ -496,7 +496,7 @@ landscape:
             logo: wasm.svg
             crunchbase: https://www.crunchbase.com/organization/allegro-b3b3
       - subcategory:
-        name: Tooling
+        name: 工具
         items:
           - item:
             name: Asyncify
@@ -579,7 +579,7 @@ landscape:
             logo: witc.svg
             crunchbase: https://www.crunchbase.com/organization/second-state
       - subcategory:
-        name: Orchestration & Management
+        name: 任务编排
         items:
           - item:
             name: container2wasm
@@ -692,7 +692,7 @@ landscape:
             crunchbase: https://www.crunchbase.com/organization/red-hat
             unnamed_organization: true
       - subcategory:
-        name: Hosted Platforms
+        name: 托管平台
         items:
           - item:
             name: Azure Kubernetes Service (AKS) (Wasm)
@@ -745,7 +745,7 @@ landscape:
             logo: wasmer.svg
             crunchbase: https://www.crunchbase.com/organization/wasmer
       - subcategory:
-        name: Decentralized Platforms
+        name: 分布式平台
         items:
           - item:
             name: Casper
@@ -806,7 +806,7 @@ landscape:
             logo: ripple.svg
             crunchbase: https://www.crunchbase.com/organization/ripple-labs
       - subcategory:
-        name: Debugging & Observability
+        name: 可观测性
         items:
           - item:
             name: Modsurfer
@@ -827,7 +827,7 @@ landscape:
             logo: wasm.svg
             crunchbase: https://www.crunchbase.com/organization/w3c
       - subcategory:
-        name: Packaging, Registries & Application Delivery
+        name: 软件分发
         items:
           - item:
             name: crates.io

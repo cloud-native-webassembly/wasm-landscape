@@ -1051,7 +1051,7 @@ landscape:
               stars: 245
               license: Apache License 2.0
               description: >-
-                Wasm Language Runtimes provides popular language runtimes (Ruby, Python, …) precompiled to WebAssembly that are tested for compatibility and
+                Wasm Language 运行时 provides popular language runtimes (Ruby, Python, …) precompiled to WebAssembly that are tested for compatibility and
                 kept up to date when new versions of upstream languages are released
               latest_commit_date: '2023-07-25T07:33:43Z'
               latest_commit_link: /vmware-labs/webassembly-language-runtimes/commit/c5d01988291ffa30841be00593725cba31ebc1f8
@@ -1148,7 +1148,7 @@ landscape:
               badge: false
               percentage: null
       - subcategory:
-        name: Runtimes
+        name: 运行时
         items:
           - item:
             name: Krustlet (Wasm)
@@ -3000,7 +3000,7 @@ landscape:
               badge: false
               percentage: null
       - subcategory:
-        name: Application Frameworks
+        name: 编程框架
         items:
           - item:
             name: Ambient
@@ -3919,7 +3919,7 @@ landscape:
               badge: false
               percentage: null
       - subcategory:
-        name: Edge/Bare metal
+        name: 边缘计算
         items:
           - item:
             name: Flatcar Container Linux
@@ -4190,7 +4190,7 @@ landscape:
               badge: 7671
               percentage: 15
       - subcategory:
-        name: AI/Machine Learning
+        name: 人工智能
         items:
           - item:
             name: Apache TVM
@@ -4607,7 +4607,7 @@ landscape:
               badge: false
               percentage: null
       - subcategory:
-        name: Embedded Functions
+        name: 嵌入式
         items:
           - item:
             name: Dapr (Wasm)
@@ -5635,7 +5635,7 @@ landscape:
               badge: false
               percentage: null
       - subcategory:
-        name: Tooling
+        name: 工具
         items:
           - item:
             name: Asyncify
@@ -6384,7 +6384,7 @@ landscape:
               badge: false
               percentage: null
       - subcategory:
-        name: Orchestration & Management
+        name: 任务编排
         items:
           - item:
             name: container2wasm
@@ -7854,7 +7854,7 @@ landscape:
               badge: false
               percentage: null
       - subcategory:
-        name: Hosted Platforms
+        name: 托管平台
         items:
           - item:
             name: Azure Kubernetes Service (AKS) (Wasm)
@@ -8047,7 +8047,7 @@ landscape:
               badge: false
               percentage: null
       - subcategory:
-        name: Decentralized Platforms
+        name: 分布式平台
         items:
           - item:
             name: Casper
@@ -8619,7 +8619,7 @@ landscape:
               badge: false
               percentage: null
       - subcategory:
-        name: Debugging & Observability
+        name: 可观测性
         items:
           - item:
             name: Modsurfer
@@ -8776,7 +8776,7 @@ landscape:
               badge: false
               percentage: null
       - subcategory:
-        name: Packaging, Registries & Application Delivery
+        name: 软件分发
         items:
           - item:
             name: crates.io
