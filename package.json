@@ -1,0 +1,80 @@
+{
+  "name": "cloud-native-webassembly",
+  "version": "0.0.1",
+  "private": true,
+  "description": "source files of cloud-native-webassembly.github.io",
+  "repository": "https://github.com/cloud-native-webassembly/site.git",
+  "homepage": "./",
+  "type": "module",
+  "author": "Qiming Liu",
+  "license": "Apache-2.0",
+  "bugs": "https://github.com/cloud-native-webassembly/site/issues",
+  "spelling": "cSpell:ignore HTMLTEST precheck postbuild -",
+  "scripts": {
+    "setup": "cd /work/interactive-landscape; yarn",
+    "build": "npm run _landscape_build && npm run _landscape_data && npm run _landscape_render && npm run _landscape_sync",
+    "_landscape_build": "cd /work/interactive-landscape; PROJECT_PATH=/work/wasm-landscape SKIP_VERSION_CHECK=1 yarn prepare-landscape",
+    "_landscape_data": "cd /work/interactive-landscape; PROJECT_PATH=/work/wasm-landscape SKIP_VERSION_CHECK=1 node ./src/api/ids.js 'category=&project=&license=&organization=&headquarters=&company-type=&industries=&sort=name&grouping=no&bestpractices=&enduser=&parent=&language=&specification=&format=wasm'",
+    "_landscape_sync": "cd /work/wasm-landscape;rsync -a dist/ /work/site/build/",
+    "_landscape_render": "cd /work/interactive-landscape && PROJECT_PATH=/work/wasm-landscape SKIP_VERSION_CHECK=1 node tools/renderLandscape.js",
+    "_landscape_server": "cd /work/interactive-landscape && PROJECT_PATH=/work/wasm-landscape SKIP_VERSION_CHECK=1 node tools/distServer.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "prettier": {
+    "proseWrap": "always"
+  },
+  "dependencies": {
+    "bootstrap": "5.3.2",
+    "d3": "^7.8.4",
+    "fs-extra": "^11.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sanitize-filename": "^1.6.3",
+    "web-vitals": "^2.1.4",
+    "yaml": "^2.2.2"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "6.4.2",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/d3": "^7.4.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.66",
+    "@types/react": "^18.2.39",
+    "@types/react-dom": "^18.2.17",
+    "autoprefixer": "^10.4.14",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "bootstrap-sass": "^3.4.3",
+    "env-cmd": "^10.1.0",
+    "eslint": "^8.39.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.32.2",
+    "hugo-extended": "0.119.0",
+    "postcss": "^8.4.23",
+    "postcss-cli": "^10.1.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
