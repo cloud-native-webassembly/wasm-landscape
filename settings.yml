@@ -1,7 +1,7 @@
 global:
-  name: CNCF Cloud Native Interactive Landscape
-  short_name: CNCF
-  mode: CNCF
+  name: WASM - CNCF Cloud Native Interactive Landscape
+  short_name: WASM
+  mode: WASM
   repo: cncf/landscape
   website: https://landscape.cncf.io
   short_domain: l.cncf.io
