@@ -4,7 +4,7 @@ landscape:
     name: Wasm
     subcategories:
       - subcategory:
-        name: Languages
+        name: 编程语言
         items:
           - item:
             name: .NET

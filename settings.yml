@@ -186,7 +186,7 @@ big_picture:
     category: Wasm
     elements:
       - type: VerticalCategory
-        category: Languages
+        category: 编程语言
         width: 180
         height: 200
         top: 0
