@@ -154,17 +154,10 @@ membership:
     funding: CNCF
 home:
   header: >
-    <h1>CNCF Cloud Native Interactive Landscape</h1> The cloud native landscape (<a target="_blank" href="images/landscape.png">png</a>, <a target="_blank"
-    href="images/landscape.pdf">pdf</a>), serverless landscape (<a target="_blank" href="images/serverless.png">png</a>, <a target="_blank"
-    href="images/serverless.pdf">pdf</a>), and member landscape (<a target="_blank" href="images/members.png">png</a>, <a target="_blank"
-    href="images/members.pdf">pdf</a>) are dynamically generated below. <h1><a href="https://cncf.landscape2.io/" target="_blank"> Check Landscape V2.0
-    Here!</a></h1>
+    <h1>CNCF Cloud Native Interactive Landscape</h1>
   footer: |
     Crunchbase data is used under license from Crunchbase to CNCF.
-ads:
-  - url: https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/
-    image: /images/kubecon-cloudnativecon-north-america-2023.png
-    title: KubeCon + CloudNativeCon North America 2023
+ads: []
 presets:
   - url: /format=card-mode&grouping=no&license=open-source&sort=first-commit
     label: Cards by age
@@ -280,53 +273,6 @@ big_picture:
         left: 600
         color: rgb(143,109,61)
         fit_width: true
-      - type: LandscapeInfo
-        width: 520
-        height: 120
-        top: 540
-        left: 0
-        children:
-          - type: text
-            text: >
-              WebAssembly (Wasm) is a small and portable VM that runs in modern web browsers, servers, and on a vast array of diverse hardware. Wasm brings new
-              capabilities and additional security features to cloud native developers.
-            font_size: 9
-            top: 10
-            left: 90
-            right: 150
-          - type: image
-            title: QR Code
-            width: 70
-            height: 70
-            top: 10
-            left: 5
-            image: qr-w.svg
-          - type: title
-            title: w.cncf.io
-            font_size: 16
-            top: 78
-            left: 8
-          - type: image
-            title: Landscape Logo
-            width: 110
-            top: 10
-            right: 15
-            image: left-logo.svg
-          - type: image
-            title: CNCF Logo
-            width: 109
-            top: 65
-            right: 15
-            image: right-logo.svg
-      - type: LandscapeLink
-        url: landscape
-        title: Cloud Native Landscape
-        layout: subcategory
-        left: 800
-        top: 500
-        width: 180
-        height: 125
-        color: rgb(64,117,191)
 test:
   header: CNCF Cloud Native Interactive Landscape
   section: CNCF Graduated Projects
