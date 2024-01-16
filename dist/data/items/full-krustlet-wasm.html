@@ -1,0 +1,4063 @@
+<style>/* css3 constants */
+:root {
+  --navy: #38404a;
+  --navy-light: #696D70;
+  --blue: #2E67BF;
+  --blue-hover: #1D456B;
+
+  /* This is not supported yet in browser, will have to preprocess with string.replace */
+  --mobilewidth-screen: 812px;
+  --sm-screen: 576px;
+  --md-screen: 768px;
+  --lg-screen: 992px;
+  --xl-screen: 1200px;
+  /*   */
+
+  --spacing: 1em;
+}
+
+
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+strong, b {
+  font-weight: 700;
+}
+
+body {
+  color: rgba(0, 0, 0, 0.87);
+  margin: 0;
+  font-size: 0.875rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  background-color: #fafafa;
+}
+
+@media print {
+  body {
+    background-color: #fff;
+  }
+}
+
+body::backdrop {
+  background-color: #fafafa;
+}
+
+
+html, body, main, .app {
+  height: 100%;
+}
+html.embed {
+  height: auto;
+}
+html {-webkit-text-size-adjust: 100%;}
+body.popup {
+  background-color:transparent !important;
+}
+
+a {text-decoration: none; transition: none; color: var(--blue); }
+a:hover {font-weight: bold; }
+a.white-link {
+  color: white;
+}
+a svg {
+  stroke: var(--blue);
+  stroke-width: 0;
+}
+a:hover svg {
+  stroke-width: 0.5;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.wrapper{
+  overflow: hidden;
+  padding-left: 20px;
+}
+
+.content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #aaa;
+}
+
+
+.sh_wrapper {
+  position: relative;
+  width: 100%;
+  font-size: 1em;
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  margin: 0.5rem 5px;
+}
+
+.sh_wrapper div {
+  color: #565656;
+  font-size:0.8em !important;
+}
+
+.sh_wrapper .link {
+  text-decoration: none;
+  transition: all 0.5s;
+  cursor: pointer;
+  color: var(--blue);
+}
+.sh_wrapper .link:hover {
+  transition: all 0.1s; color: var(--blue-hover);
+}
+
+.disclaimer {
+  margin: -45px 5px 14px;
+  font-size: 0.8em;
+  padding-right: 220px;
+  color: var(--navy-light);
+}
+.disclaimer a {
+  color: #366fa8;
+}
+.disclaimer h1 {
+  font-size: 2.1rem;
+  line-height: 30px;
+  display: block;
+  margin: 0 0 14px;
+  color: var(--navy);
+}
+
+@media (max-width: 992px) {
+  .disclaimer h1 {
+    font-size: 1.4rem;
+    line-height: normal;
+  }
+  .disclaimer {
+    padding-right: 0;
+  }
+}
+
+.summary {
+  margin: 0 5px 14px;
+  color: var(--navy);
+  font-size: 0.8rem;
+  height: 18px;
+}
+
+@media (max-width: 992px) {
+  .big-picture .summary, .disclaimer {
+    display: none;
+  }
+}
+
+.embed .summary {
+  display: none !important;
+}
+.embed .disclaimer {
+  display: none !important;
+}
+
+.embed .sidebar {
+  display: none !important;
+}
+.embed .sidebar-show {
+  display: none !important;
+}
+.embed .header_container {
+  display: none !important;
+}
+.embed .big-picture-switch {
+  display: none !important;
+}
+.embed .main {
+  margin-left: 0px !important;
+}
+.embed .charts-desktop {
+  display: none !important;
+}
+.embed .charts-mobile {
+  display: none !important;
+}
+.embed a[data-type=internal] {
+  color: currentColor;
+  cursor: inherit;
+  pointer-events: none;
+}
+
+
+.fullscreen .summary{
+  display: none;
+}
+.fullscreen .disclaimer{
+  display: none;
+}
+.fullscreen .header_container {
+  display: none;
+}
+.fullscreen .sidebar {
+  display: none;
+}
+
+.header_container {
+  z-index: 2;
+  height: 55px;
+  flex: none;
+  font-size: 1rem;
+}
+.header_container .header .info {
+  margin-top: -32px;
+  padding-left: 20px;
+  height: auto;
+}
+
+.landscape-logo {
+  display: block;
+  padding: var(--spacing);
+}
+
+@media (max-width: 992px) {
+  #home .landscape-logo {
+    margin-left: 30px;
+  }
+}
+
+@media (min-width: 992px) {
+  #home:not(.big-picture) .landscape-logo {
+    position: fixed;
+  }
+}
+
+@media (max-width: 992px) {
+  .no-scroll-mobile {
+    overflow: hidden;
+  }
+}
+
+#guide-page {
+  color: #38404a;
+  font-size: 1rem;
+  min-width: 360px;
+  position: relative;
+}
+
+#guide-page .links {
+  position: fixed;
+  right: 10px;
+  top: 100px;
+  font-size: 16px;
+  width: 130px;
+  font-weight: bold;
+}
+
+@media (max-width: 1250px) {
+  #guide-page .links {
+    position: inherit;
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+  #guide-page .links > div {
+    display: inline-block;
+    padding-right: 100px;
+  }
+}
+
+#guide-page .links > div {
+  position: relative;
+}
+
+#guide-page .links svg {
+  fill: currentColor;
+  position: relative;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+}
+
+
+
+#guide-page h1 {
+  font-size: 2.5em;
+}
+
+#guide-page h2 {
+  font-size: 2.25em;
+}
+
+#guide-page h3 {
+  font-size: 1.75em;
+}
+
+#guide-page h4 {
+  font-size: 1.375em;
+}
+
+#guide-page h5 {
+  font-size: 1.125em;
+}
+
+#guide-page h1,
+#guide-page h2,
+#guide-page h3,
+#guide-page h4,
+#guide-page h5 {
+  margin-top: calc(var(--spacing) * 0.8);
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+#guide-page h1.title {
+  margin-top: 0;
+  max-width: 580px;
+}
+
+@media (max-width: 992px) {
+  #guide-page .guide-header h1.title {
+    display: none;
+  }
+}
+
+#guide-page .main-content h1.title {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  #guide-page .main-content h1.title {
+    display: block;
+  }
+}
+
+#guide-page .container {
+  margin-left: 250px;
+  max-width: 1280px;
+}
+
+#guide-page p > img,
+#guide-page .items,
+#guide-page .metadata {
+  margin: calc(var(--spacing) * 1.5) 0;
+}
+
+#guide-page a:hover {
+  letter-spacing: inherit !important;
+}
+
+#guide-page blockquote {
+  margin: calc(var(--spacing) * 1.375) 0;
+  padding: var(--spacing);
+  background: #ebebeb;
+  font-size: 0.9em;
+}
+
+#guide-page blockquote :first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+#guide-page blockquote :last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+#guide-page .guide-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid #e5e5e5;
+  background: #fafafa;
+  z-index: 2;
+}
+
+@media (max-width: 992px) {
+  #guide-page {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing);
+  }
+}
+
+#guide-page .guide-header .container {
+  padding: var(--spacing) 0;
+}
+
+#guide-page .side-content {
+  position: fixed;
+  width: 250px;
+  border-right: 2px solid #e5e5e5;
+  background: #fafafa;
+  height: 100%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+#guide-page .guide-sidebar {
+  padding-bottom: 10px;
+  overflow-y: auto;
+  margin-top: -10px;
+}
+
+#guide-page .guide-sidebar a.display-hidden {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  #guide-page .guide-sidebar {
+    margin-top: 0;
+  }
+}
+
+#guide-page .sidebar-show {
+  display: none;
+
+  border: 0;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+
+  color: rgba(0, 0, 0, 0.54);
+  padding: 12px;
+  border-radius: 50%;
+}
+
+@media (max-width: 992px) {
+  #guide-page .sidebar-show {
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 0;
+    z-index: 3;
+  }
+  #guide-page .sidebar-show svg {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+}
+
+#guide-page .sidebar-collapse {
+  display: none;
+
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  z-index: 3;
+  width: 24px;
+  height: 24px;
+  font-size: 32px;
+  border-radius: 16px;
+  line-height: 24px;
+  background: transparent;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  transform: rotate(45deg);
+  color: rgba(0, 0, 0, 0.54);
+}
+@media (max-width: 992px) {
+  #guide-page .sidebar-collapse {
+    display: block;
+  }
+}
+
+#guide-page .side-content .landscape-logo {
+  display: block;
+  padding: var(--spacing);
+}
+
+@media (max-width: 992px) {
+  #guide-page .side-content .landscape-logo {
+    display: none;
+  }
+}
+
+#guide-page .guide-header .landscape-logo {
+  display: none;
+  padding: 0;
+}
+@media (max-width: 992px) {
+  #guide-page .guide-header .landscape-logo {
+    display: block;
+    padding-left: 44px;
+  }
+}
+
+#guide-page .sidebar-scroll {
+  padding-top: 20px;
+}
+
+@media (max-width: 992px) {
+  #guide-page .side-content {
+    display: none;
+  }
+
+  #guide-page.sidebar-open .side-content {
+    display: block;
+    position: fixed;
+    padding: var(--spacing);
+    inset: 0;
+    width: 100%;
+    overflow-y: auto;
+  }
+}
+
+#guide-page .guide-toggle {
+  margin: 5px 20px 10px;
+}
+
+#guide-page .sidebar-link {
+  display: block;
+  color: #38404a;
+  padding: 10px 20px;
+}
+
+#guide-page .sidebar-link svg {
+  stroke: none;
+}
+
+#guide-page .expandable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#guide-page .expandable svg {
+  width: 24px;
+  height: 24px;
+}
+
+#guide-page .expandable.expanded svg {
+  transform: rotate(90deg);
+}
+
+#guide-page .sidebar-link:hover {
+  background: #efefef;
+}
+
+#guide-page .sidebar-link.active {
+  font-weight: 700;
+}
+
+#guide-page .main-content {
+  border-top: 2px solid #e5e5e5;
+  padding-top: 5.5em;
+}
+
+@media (max-width: 992px) {
+  #guide-page .main-content {
+    padding-top: 4.5em;
+  }
+}
+
+#guide-page .container {
+  margin-left: 250px;
+}
+
+@media (max-width: 992px) {
+  #guide-page .container {
+    margin-left: 0;
+    padding: 1em;
+  }
+}
+
+#guide-page .content {
+  max-width: 714px;
+  margin: 0 auto;
+}
+
+#guide-page .metadata {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #d0d0d0;
+  border-right: none;
+  border-bottom: none;
+}
+
+#guide-page .metadata > div {
+  display: flex;
+}
+
+#guide-page .metadata .header {
+  background: #ebebeb;
+  font-weight: 600;
+  text-align: center;
+}
+
+#guide-page .metadata .header > div {
+  padding: 0.5em;
+}
+
+#guide-page .metadata .body > div {
+  padding: 1em;
+}
+
+#guide-page .metadata .header > div,
+#guide-page .metadata .body > div {
+  width: 50%;
+  border: 1px solid #d0d0d0;
+  border-top: 0;
+  border-left: 0;
+}
+
+#guide-page .metadata .body ul {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+#guide-page .guide-content img {
+  max-width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#guide-page .permalink {
+  align-items: center;
+  vertical-align: text-bottom
+}
+
+#guide-page .section-title {
+  /* Prevent anchor links from scrolling behind a fixed header */
+  padding-top: 5em;
+  margin-top: -5em;
+}
+
+@media (max-width: 992px) {
+  #guide-page .section-title {
+    padding-top: 4em;
+    margin-top: -4em;
+  }
+}
+
+#guide-page .permalink:hover {
+  font-weight: bold;
+}
+
+#guide-page .items {
+  overflow: hidden;
+  display: grid;
+  justify-content: center;
+  grid-auto-flow: row dense;
+}
+
+#guide-page .guide-icon {
+  width: 30px;
+  height: 33px;
+  fill: currentColor;
+  margin-top: -3px;
+  vertical-align: middle;
+}
+#guide-page .items {
+  grid-template-columns: repeat(auto-fill, 60px);
+  grid-auto-rows: 60px;
+  gap: 5.4px;
+}
+#guide-page .items .item {
+  transform: scale(1.8);
+}
+
+.guide-toggle {
+  border: 2px solid rgb(46, 103, 191);
+  background: rgb(46, 103, 191);
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 15px 0px;
+  max-width: 165px;
+  white-space: nowrap;
+}
+.guide-toggle .toggle-item {
+  user-select: none;
+  width: 49%;
+  text-align: center;
+  padding: 2px;
+  color: rgb(46, 103, 191);
+  background: white;
+  display: inline-block;
+}
+.guide-toggle .toggle-item.active {
+  background: rgb(46, 103, 191);
+  color: white;
+}
+.guide-toggle a {
+  width: 100%;
+  display: inline-block;
+}
+
+.landscapeapp-logo {
+  position: absolute;
+  top: var(--spacing);
+  right: 1rem;
+}
+
+.landscape-logo a, .landscapeapp-logo a {
+  display: flex;
+}
+
+.landscape-logo img, .landscapeapp-logo img {
+  max-width: 10em;
+  height: 3em;
+  box-sizing: content-box;
+}
+
+@media (max-width: 992px) {
+  .landscape-logo img {
+    max-width: 10em;
+    height: 2em;
+  }
+  .landscapeapp-logo img {
+    max-width: 10em;
+    height: 2em;
+  }
+}
+.landscapeapp-logo img {
+  max-width: 12em;
+}
+
+.sidebar {
+  width: 205px;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 6;
+}
+.sidebar-scroll {
+  padding: 0 20px 0px 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  overflow-y: auto;
+
+}
+@media (max-width: 992px) {
+  .sidebar-scroll {
+    padding-top: 10px;
+  }
+}
+.app .sidebar-collapse {
+  display: none;
+
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  z-index: 3;
+  width: 24px;
+  height: 24px;
+  font-size: 32px;
+  border-radius: 16px;
+  line-height: 24px;
+  background: transparent;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  transform: rotate(45deg);
+  color: rgba(0, 0, 0, 0.54);
+}
+@media (max-width: 992px) {
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    width: 215px;
+    transform: translate(-215px, 0);
+    transition: 0.3s;
+    top: 0;
+    z-index: 6;
+    background: #fff;
+    padding-top: 12px;
+    overflow: auto;
+  }
+  .app .sidebar-collapse {
+    display: block;
+  }
+  .filters-opened .sidebar {
+    transform: none;
+  }
+}
+.sidebar fieldset {
+  margin-top: 5px;
+  color: var(--navy);
+}
+.sidebar .content-sidebar {
+  flex: 150px 0 0;
+  padding: 13px 0 0 20px;
+}
+.sidebar .filters-action {
+  height: 25px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  display: inline-block;
+}
+.sidebar .filters-action span {
+  font-size: 14px;
+  position: relative;
+  top: -3px;
+}
+.sidebar .filters-action svg {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+@media (max-width: 992px) {
+  .sidebar .filters-action {
+    margin-top: 15px;
+  }
+}
+
+.sidebar-presets {
+  margin: 1rem 0;
+  font-size: 0.8rem;
+}
+.sidebar-presets h4 {
+  margin: 0 0 8px 0;
+}
+.sidebar-presets div {
+  margin-bottom: 3px;
+}
+.sidebar-presets a {
+  text-decoration: none;
+  display: block;
+  position: relative;
+}
+.sidebar-presets a:focus {
+  outline: none;
+}
+.sidebar-presets a.active {
+  color: #000; font-weight: bold;
+}
+.sidebar div {
+  color: var(--navy);
+}
+.sidebar legend {
+  font-size:0.6em !important;
+  color: var(--navy-light);
+}
+
+.sidebar .title {
+  display:flex;
+  flex-direction: column;
+  font-size:1.3em;
+  color: #6d7e90 !important;
+  align-items: flex-end;
+  padding: 10px 0 0 20px;
+}
+.sidebar .title a {
+  color:#949494;
+}
+.sidebar .title p {
+  color: #CCC;
+  font-size: 0.6em;
+  margin: 3px 0;
+}
+.sidebar-note {
+  font-size: 0.8rem;
+  color: #999;
+  background: #e8e8e8;
+  padding: 15px;
+  border-radius: 4px;
+}
+.sidebar-event {
+  margin: 0 -10px;
+  position: relative;
+  display: block;
+}
+.sidebar-event img {
+  width: 180px;
+}
+
+.app {
+  position: relative;
+}
+.app .sidebar-show {
+  display: none;
+
+  border: 0;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+
+  color: rgba(0, 0, 0, 0.54);
+  padding: 12px;
+  border-radius: 50%;
+}
+@media (max-width: 992px) {
+  .app .sidebar-show {
+
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 0;
+    z-index: 3;
+  }
+
+  .app .sidebar-show svg {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    flex-shrink: 0;
+    user-select: none;
+  }
+}
+
+.app-overlay {
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #000;
+  margin-left: -100%;
+  transition: opacity 0.3s, margin 0s;
+  transition-delay: 0s, 0.3s; z-index: 4;
+}
+
+.filters-opened {
+  overflow: hidden;
+}
+
+.filters-opened .app-overlay {
+  margin: 0;
+  opacity: 0.4;
+  transition-delay: 0s, 0s;
+}
+
+.main-parent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  margin-left: 205px;
+  padding: 10px;
+  z-index: 3;
+}
+@media (max-width: 992px) {
+  .main {
+    margin-left: 0;
+    position: relative;
+  }
+}
+.main-note {
+  background: #e8e8e8;
+  font-size: 0.7rem;
+  color: #999;
+  padding: 10px 15px;
+  border-radius: 3px;
+}
+.main.embed {
+  margin-left: 0;
+  padding-top: 5px !important;
+  min-height: 500px;
+}
+
+.main, .cards-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+html.embed body {
+  background-color: inherit;
+}
+
+@media (max-width: 992px) {
+  .big-picture .main {
+    padding-top: 0;
+  }
+}
+
+.fullscreen .main {
+  margin-left: 0;
+  padding-top: 0px;
+}
+
+
+/* grid */
+.row {
+  margin-left: -20px;
+  margin-right: -20px;
+  display: flex;
+}
+
+.col { padding: 0 20px; }
+.col-25 { width: 25%;}
+.col-33 { width: 33.33%;}
+.col-50 { width: 50%;}
+.col-66 { width: 66.66%;}
+.col-75 { width: 75%;}
+.col-20 { width: 20%;}
+.col-40 { width: 40%;}
+.col-60 { width: 60%;}
+.col-80 { width: 80%;}
+.tight-row { display: flex; }
+.tight-col {padding-right: 0; padding-left: 20px; }
+
+/* tags */
+.tag {
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  border-radius: 4px;
+  font-size: 0;
+  margin: 0 5px 5px 0;
+  color: #000;
+  border: 0;
+}
+.tag:hover {
+  color: #000;
+}
+.tag-name {
+  padding: 4px 6px;
+  margin-right: -6px;
+  font-size: 0.6rem;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 3px 0 0 3px;
+}
+.tag-value {
+  padding: 4px 6px;
+  font-size: 0.6rem;
+  display: inline-block;
+}
+.tag-blue { background: #a0cfff; }
+.tag-blue:hover {background: #89c3ff;}
+.tag-grass { background: #a1eaff; }
+.tag-grass:hover {background: #87e4ff;}
+.tag-purple {background: #d7c1fb; }
+.tag-purple:hover {background: #caa9ff;}
+.tag-orange {background: #a6f5ed; }
+.tag-orange:hover {background: #7dfff2;}
+
+.column-content {
+  display: flex; flex-wrap: wrap; position: relative
+}
+.column-content [data-section-id] {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.oss img { background: white; }
+.nonoss img { background: #E4E4E4; }
+.mosaic {
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  border-radius: 2px;
+  box-shadow: 1px 1px 3px #d6d6d6;
+  background: #fff;
+  border: 1px solid #fff;
+}
+.mosaic-wrap {
+  padding: 5px;
+  width: 200px;
+  display: flex;
+}
+
+@media (max-width: 1839px) {
+  .mosaic-wrap { width: 14.285%; }
+}
+@media (max-width: 1639px) {
+  .mosaic-wrap { width: 16.666%; }
+}
+@media (max-width: 1439px) {
+  .mosaic-wrap { width: 20%; }
+}
+@media (max-width: 1239px) {
+  .mosaic-wrap { width: 25%; }
+}
+@media (max-width: 1039px) {
+  .mosaic-wrap { width: 33.333%; }
+}
+@media (max-width: 850px) and (max-height: 750px) {
+  .mosaic-wrap { width: 25%; }
+}
+@media (max-width: 812px) {
+  .mosaic-wrap { width: 33.333%; }
+}
+@media (max-width: 550px) {
+  .mosaic-wrap { width: 50%; }
+}
+
+@media (max-width: 1839px) {
+  .embed .mosaic-wrap { width: 12.5%; }
+}
+@media (max-width: 1639px) {
+  .embed .mosaic-wrap { width: 14.285%;}
+}
+@media (max-width: 1439px) {
+  .embed .mosaic-wrap {width: 16.666%;}
+}
+@media (max-width: 1239px) {
+  .embed .mosaic-wrap {width: 20%;}
+}
+@media (max-width: 1039px) {
+  .embed .mosaic-wrap {width: 25%;}
+}
+@media (max-width: 850px) and (max-height: 750px) {
+  .embed .mosaic-wrap { width: 25%; }
+}
+@media (max-width: 812px) {
+  .embed .mosaic-wrap { width: 33.333%; }
+}
+@media (max-width: 550px) {
+  .embed .mosaic-wrap { width: 50%; }
+}
+
+.mosaic .logo_wrapper {
+  padding: 2px;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mosaic .logo_wrapper .logo {
+  width: 195px;
+  height: 100px;
+  max-width: 100%;
+  border-radius: 4px 4px 0 0;
+}
+
+
+.mosaic .mosaic-info {
+  font-size: 0.6em;
+  border-width:1px 0 0 0;
+  border-style: solid;
+  border-color: #dedede;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--navy-light);
+}
+
+.mosaic h5 {
+  margin:0 0 5px 0 !important;
+  color: var(--navy);
+  font-size: 1em;
+}
+
+.mosaic .mosaic-stars {
+  line-height: 15px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.mosaic .material-icons {
+  line-height: 15px;
+  vertical-align: top;
+}
+
+.mosaic .mosaic-funding {
+  white-space: nowrap;
+}
+
+.logo-mode .mosaic .mosaic-info * {
+  display: none;
+}
+.logo-mode .mosaic .logo_wrapper .logo {
+  height: 130px;
+}
+.logo-mode .mosaic .mosaic-info .mosaic-title {
+  display: inherit;
+  width: 100%;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.flat-mode .sh_wrapper {
+  background: transparent;
+  font-size: 24px;
+  text-align: center;
+}
+.flat-mode .sh_wrapper div .items-count {
+  display: none
+}
+.flat-mode .mosaic .logo {
+  height: 130px;
+  width: 100%;
+  padding: 2px;
+}
+.flat-mode .mosaic h5 {
+  font-size: 16px;
+  font-weight: normal;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+.flat-mode .mosaic .separator {
+  width: 100%;
+  border-top: 1px solid grey;
+}
+.flat-mode .mosaic {
+  box-shadow: inherit;
+  border: 1px solid grey;
+  background: inherit;
+}
+
+.borderless-mode .mosaic-wrap {
+  padding: 30px;
+}
+
+.borderless-mode .sh_wrapper {
+  background: transparent;
+  font-size: 24px;
+}
+.borderless-mode .sh_wrapper div .items-count {
+  display: none
+}
+.borderless-mode .mosaic .logo {
+  height: 160px;
+  width: 100%;
+}
+.borderless-mode .mosaic {
+  box-shadow: inherit;
+  border: inherit;
+  background: inherit;
+}
+
+.ios body {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.ios * {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+html.ios.has-selected-item, html.ios.has-selected-item body {
+  height: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, rgb(27,68,108) 0%, rgb(92,107,156) 100%);
+}
+
+.big-picture-switch {
+  margin-bottom: 2px;
+}
+
+.big-picture-switch a {
+  min-width: 160px;
+  display: inline-block;
+  color: var(--blue);
+  opacity: 1;
+  padding: 6px 12px;
+  height: 48px;
+  font-weight: 500;
+  line-height: 1.75;
+  white-space: normal;
+  cursor: pointer;
+  vertical-align: middle;
+  text-align: center;
+}
+.big-picture-switch a.selected {
+  border-bottom: 2px solid var(--blue);
+}
+
+@media (max-width: 1200px) {
+  .big-picture-switch a {min-width: 120px; }
+}
+@media (max-width: 992px) {
+  .big-picture-switch a {min-width: 105px; }
+}
+@media (max-width: 768px) {
+  .big-picture-switch a {min-width: 90px; }
+}
+@media (max-width: 576px) {
+  .big-picture-switch a {min-width: padding: 6px; min-width: 80px; }
+}
+
+.landscape-flex {
+  position: relative;
+  flex: 1;
+}
+
+.landscape-wrapper {
+  position: absolute;
+  background: #1b446c;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: scroll;
+}
+
+.inner-landscape {
+  font-size: 12px;
+  line-height: 1.1;
+  transform-origin: 0px 0px;
+}
+
+.cards-section {
+  position: relative;
+}
+
+.right-buttons .zoom-reset {
+  cursor: pointer;
+  min-width: 40px;
+  text-align: center;
+  margin-top: -6px;
+}
+.right-buttons .disabled {
+  cursor: default;
+  pointer-events: none;
+}
+.right-buttons .disabled svg {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.embed .tweet-button {
+  display: none;
+}
+
+.embed.modal-embed .column-content {
+  display: none;
+}
+.embed.modal-embed {
+  background: inherit;
+}
+.embed.modal-embed #embedded-footer {
+  display: none;
+}
+
+.tweet-button {
+  width: 105px;
+  display: flex;
+}
+
+.tweet-button .tweet-count-wrapper {
+  display: inline-block;
+  position: relative;
+  width: auto;
+  height: auto;
+  background-color: #f1faff;
+  border: 1px solid #b4dbee;
+  border-radius: 2px;
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+.tweet-button .tweet-count-wrapper:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -9px;
+  right: auto;
+  top: calc(50% - 4px);
+  border: 4px solid;
+  border-color: transparent #b4dbee transparent transparent;
+}
+
+.tweet-button .tweet-count-wrapper:after{
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -8px;
+  right: auto;
+  top: calc(50% - 4px);
+  border: 4px solid;
+  border-color: transparent #f1faff transparent transparent;
+}
+
+.tweet-button .tweet-count-wrapper .tweet-count{
+  padding: 2px 4px;
+  text-align: left;
+  font-size: 10px;
+  margin: 0
+}
+
+.tweet-button a {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 2px;
+  width: 60px;
+  background: rgb(25,114,230);
+  color: white;
+}
+.tweet-button a svg {
+  width: 14px;
+  height: 14px;
+  fill: white;
+}
+.tweet-button a span {
+  position: relative;
+  font-size: 11.5px !important;
+  font-weight: bold;
+}
+
+.right-buttons {
+  position: absolute;
+  top: 10px;
+  width: auto;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.right-buttons svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  color: rgba(0, 0, 0, 0.54);
+  cursor: pointer;
+  margin: 10px;
+}
+
+.right-buttons .fullscreen-button {
+  margin-left: 2px;
+}
+
+@media (max-width: 768px) {
+  .big-picture .main {
+    padding-bottom: 40px;
+  }
+
+  .big-picture .right-buttons {
+    top: initial;
+    bottom: -35px;
+    width: 100%;
+  }
+}
+
+.inner-landscape .large-item, .items .large-item {
+  cursor: pointer;
+  position: relative;
+  width: 71px;
+  height: 63px;
+}
+
+.inner-landscape .large-item.large-item-16, .items .large-item.large-item-16 {
+  cursor: pointer;
+  position: relative;
+  width: 145px;
+  height: 128px;
+}
+
+.inner-landscape .small-item, .items .small-item {
+  cursor: pointer;
+  position: relative;
+  width: 34px;
+  height: 30px;
+  border: 1px solid grey;
+  border-radius: 2px;
+  padding: 1px;
+}
+
+.inner-landscape .item-wrapper, .items .item-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column-end: span 1;
+  grid-row-end: span 1;
+}
+
+.inner-landscape .item-wrapper.wrapper-large-4, .items .item-wrapper.wrapper-large-4 {
+  grid-column-end: span 2;
+  grid-row-end: span 2;
+}
+
+.inner-landscape .item-wrapper.wrapper-large-16, .items .item-wrapper.wrapper-large-16 {
+  grid-column-end: span 4;
+  grid-row-end: span 4;
+}
+
+
+
+@media (max-width: 576px) {
+  .right-buttons {
+    position: fixed;
+    top: initial;
+    bottom: 0;
+    width: 100%;
+    background-color:#F4F4f4;
+    padding: 5px 10px;
+    z-index: 10;
+  }
+}
+
+.landscape-wrapper svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.modal {
+  perspective: 2000px;
+  overflow: auto;
+  display: block;
+  position: fixed;
+  z-index: 1300;
+  inset: 0px;
+}
+.modal svg { color: rgb(123,123,123); }
+.modal-shadow {
+  opacity: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  z-index: -1;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+}
+.modal-container {
+  height: 100%;
+  outline: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-prev, .modal-next {
+  position: absolute;
+  top: 50%;
+  margin-top: -20px;
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.modal-prev svg, .modal-next svg {
+  width: 64px;
+  height: 64px;
+  fill: white;
+}
+.modal-prev:hover, .modal-next:hover {
+  opacity: 1;
+}
+.modal-prev[disabled], .modal-next[disabled] {
+  cursor: defaut;
+  opacity: 0.1;
+}
+
+.modal-prev { left: -60px; }
+
+.modal-next { right: -60px;}
+
+.modal-content .charts-desktop {
+  display: inherit;
+}
+.modal-content .charts-mobile {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .modal-prev {left: -45px;}
+  .modal-next {right: -45px;}
+}
+@media (max-width: 750px) {
+  .modal-prev, .modal-next {
+    width: 40px;
+    height: 100px;
+    line-height: 100px;
+    margin-top: -50px;
+    font-size: 2.5rem;
+    text-align: center;
+    opacity: 1;
+    svg { display: none; }
+  }
+  .modal-prev:before, .modal-next:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border: transparent 20px solid;
+    position: absolute;
+    top: 0; bottom: 0; margin: auto;
+  }
+  .modal-prev {
+    left: -40px;
+    &:before {border-right-color: #fff; border-left-width: 0; right: 5px;}
+  }
+  .modal-next {right: -40px;
+    &:before {border-left-color: #fff; border-right-width: 0; left: 5px;}
+  }
+  .row {display: block;}
+  .col {width: 100% !important;}
+}
+.modal .modal-body {
+  color: rgba(0, 0, 0, 0.87);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background-color: #fff;
+  box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  overflow: visible;
+  max-height: 640px;
+  width: 90%;
+  max-width: 940px;
+  border-radius: 8px;
+  margin: 50px;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  bottom: 20px;
+  right: 0;
+  margin: auto;
+}
+
+.modal .modal-close {
+  transform: scaleY(0.8);
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 30px;
+  opacity: 0.4;
+  color: #000;
+  z-index: 3;
+  width: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+.modal .modal-close:hover {
+  opacity: 1;
+}
+
+@media(max-width: 1000px) {
+  .modal-content .charts-desktop {
+    display: none;
+  }
+  .modal-content .charts-mobile {
+    display: inherit;
+  }
+  .modal-content {
+    padding: 50px 20px 20px;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    bottom: 30px;
+    right: 40px;
+    margin: 0;
+    max-height: none;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+  }
+  .modal-content .product-logo {
+    margin: 0 auto 1rem;
+    position: relative;
+    width: auto;
+    max-width: 250px;
+    height: 180px;
+    top: 0;
+    left: 0;
+    user-select: none;
+  }
+
+  .modal-content .product-tags {
+    position: static;
+    margin-left: calc(50% - 125px);
+  }
+
+  .modal-content .product-scroll {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    overflow: visible;
+    position: static;
+  }
+}
+
+
+.embed .modal .modal-body {
+  max-height: 480px;
+}
+
+.popup .modal .modal-body {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  box-shadow: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+}
+
+.product-badges > div {
+  margin-bottom: 5px;
+}
+
+.product-logo {
+  margin-bottom: 2.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  padding: 16px;
+  border: #fff 4px solid;
+  height: 172px;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 30%;
+}
+.product-logo-img {
+  cursor: pointer;
+  margin: auto;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.nonoss .product {border-color: #E4E4E4;}
+.product-tags {
+  position: absolute;
+  left: 40px;
+  top: 230px;
+  margin-bottom: 1rem;
+}
+.product-main {
+  font-size: 0.8rem;
+  line-height: 130%;
+  color: var(--navy);
+}
+
+.product-scroll {
+  position: absolute;
+  top: 40px;
+  left: calc(40% - 20px);
+  bottom: 40px; right: 20px;
+  padding-right: 20px;
+  overflow: auto;
+}
+.product-name {
+  font-size: 2rem;
+  line-height: 130%;
+}
+.product-parent {
+  font-weight: bold; margin-bottom: 0.8rem;
+}
+.product-parent .tag {
+  margin-left: 8px;
+  margin-top: 0px;
+  line-height: 16px;
+  height: 22px;
+  font-weight: normal;
+}
+.product-parent a {
+  line-height: 22px;
+}
+.product-category {
+  color: var(--navy-light); margin-bottom: 0.8rem;
+}
+.product-category .product-category-separator {
+  margin: 0 5px; font-size: 0.6rem;
+}
+.product-description {
+  font-size: 1.1rem;
+  line-height: 130%;
+  margin-bottom: 0.8rem;
+  max-height: 300px;
+}
+.product-properties {
+  font-size: 0.8em;
+  color: var(--navy);
+  margin: 2rem 0;
+}
+.product-property {
+  margin-bottom: 0.5rem;
+}
+.product-property .product-value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-property .product-value a {
+  color: var(--blue);
+}
+@media (max-width: 750px) {
+  .product-name {display: block; width: 100%;}
+  .product-value {display: block; width: 100%;}
+}
+.product-repo a {
+  margin-right: 10px;
+}
+.product-repo .product-stars-label {
+  margin-right: 10px;
+}
+.product-repo .product-stars-label .primary-repo {
+  margin-right: 10px;
+  color: black;
+}
+.product-repo .product-stars {
+  color: var(--navy);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  line-height: 16px;
+  display: inline-block;
+}
+.product-repo-stars svg {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: top;
+  fill: currentColor;
+}
+.product-twitter {
+  position: relative;
+}
+.product-twitter:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.multiline {
+  height: 22px !important;
+  width: 146px !important;
+  position: relative !important;
+}
+.multiline .tag-name {
+  position: absolute !important;
+  top: 4px !important;
+  left: 4px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.multiline .tag-value {
+  font-size: 0.5rem !important;
+  white-space: normal !important;
+  width: 110px !important;
+  padding: 0 2px !important;
+  position: relative !important;
+  display: table-cell !important;
+  vertical-align: middle !important;
+  left: 40px !important;
+  height: 22px;
+}
+
+.twolines {
+  height: 22px !important;
+  width: 145px !important;
+  position: relative !important;
+}
+
+.twolines .tag-name {
+  position: absolute;
+  left: 0px;
+  top: -1px;
+  width: 145px;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-align: center;
+
+}
+.twolines .tag-value {
+  position: absolute;
+  left: 0px;
+  width: 145px;
+  white-space: normal !important;
+  top: 5px;
+  text-align: center;
+}
+
+.modal-content .single-column .product-property .col:nth-child(1) {
+  display: inline-block;
+  width: 40%;
+}
+.modal-content .single-column .product-property col:nth-child(2) {
+  display: inline-block;
+  width: 60%
+}
+
+
+/* select starting stylings ------------------------------*/
+.select {
+  font-family: 'Roboto';
+	position: relative;
+	width: 180px;
+  margin-bottom: 10px;
+}
+.select-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.select-text {
+	position: relative;
+	font-family: inherit;
+	background-color: transparent;
+	width: 100%;
+  font-size: 11px;
+	padding: 10px 22px 10px 0;
+	border-radius: 0;
+	border: none;
+	border-bottom: 1px solid rgba(0,0,0, 0.12);
+}
+
+/* Remove focus */
+.select-text:focus {
+	outline: none;
+	border-bottom: 1px solid rgba(0,0,0, 0);
+}
+
+	/* Use custom arrow */
+.select .select-text {
+	appearance: none;
+	-webkit-appearance:none
+}
+
+.select:after {
+	position: absolute;
+	top: 18px;
+	right: 10px;
+	/* Styling the down arrow */
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid rgba(0, 0, 0, 0.12);
+	pointer-events: none;
+}
+
+
+/* LABEL ======================================= */
+.select-label {
+	color: rgb(105, 109, 112);
+	font-size: 10px;
+	font-weight: normal;
+	position: absolute;
+	pointer-events: none;
+	left: 0;
+	top: 10px;
+	transition: 0.2s ease all;
+}
+
+/* active state */
+.select-text:focus ~ .select-label, .select-text:valid ~ .select-label {
+	top: -10px;
+	transition: 0.2s ease all;
+	font-size: 11px;
+}
+
+/* BOTTOM BARS ================================= */
+.select-bar {
+	position: relative;
+	display: block;
+	width: 100%;
+}
+
+.select-bar:before, .select-bar:after {
+	content: '';
+	height: 2px;
+	width: 0;
+	bottom: 1px;
+	position: absolute;
+	background: #2F80ED;
+	transition: 0.2s ease all;
+}
+
+.select-bar:before {
+	left: 50%;
+}
+
+.select-bar:after {
+	right: 50%;
+}
+
+/* active state */
+.select-text:focus ~ .select-bar:before, .select-text:focus ~ .select-bar:after {
+	width: 50%;
+}
+
+.select-highlight {
+	position: absolute;
+	height: 60%;
+	width: 100px;
+	top: 25%;
+	left: 0;
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.select-popup {
+  perspective: 2000px;
+  overflow: auto;
+  display: block;
+  position: fixed;
+  z-index: 1300;
+  inset: 0px;
+}
+
+.select-popup-body {
+  position: absolute;
+  z-index: 2000;
+  min-width: 200px;
+  min-height: 64px;
+  background: white;
+  border: 1px solid grey;
+  border-radius: 3px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  user-select: none;
+}
+.select-popup-body div {
+  color: rgba(0,0,0, 0.87);
+  padding: 4px 10px 2px 10px;
+  height: 26px;
+  font-size: 12px;
+}
+.select-popup-body div[data-level="2"] {
+  padding-left: 30px;
+}
+
+.select-popup-body div:hover {
+  background: #eee;
+}
+
+.select-popup-body div.active {
+  background: #ccc;
+}
+
+.pure-material-checkbox {
+    z-index: 0;
+    position: relative;
+    display: inline-block;
+    color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
+    font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+    font-size: 13px;
+    line-height: 1.5;
+    top: -1.5px;
+}
+
+/* Input */
+.pure-material-checkbox > input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    z-index: -1;
+    position: absolute;
+    left: -10px;
+    top: -8px;
+    display: block;
+    margin: 0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+    box-shadow: none;
+    outline: none;
+    opacity: 0;
+    transform: scale(1);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+/* Span */
+.pure-material-checkbox > span {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Box */
+.pure-material-checkbox > span::before {
+    content: "";
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 4px 6px 3px 1px;
+    border: solid 2px; /* Safari */
+    border-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+    border-radius: 2px;
+    width: 15px;
+    height: 15px;
+    vertical-align: top;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+/* Checkmark */
+.pure-material-checkbox > span::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    width: 10px;
+    height: 5px;
+    border: solid 2px transparent;
+    border-right: none;
+    border-top: none;
+    transform: translate(3px, 4px) rotate(-45deg);
+}
+
+/* Checked, Indeterminate */
+.pure-material-checkbox > input:checked,
+.pure-material-checkbox > input:indeterminate {
+    background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked + span::before,
+.pure-material-checkbox > input:indeterminate + span::before {
+    border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+    background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked + span::after,
+.pure-material-checkbox > input:indeterminate + span::after {
+    border-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+}
+
+.pure-material-checkbox > input:indeterminate + span::after {
+    border-left: none;
+    transform: translate(4px, 3px);
+}
+
+/* Hover, Focus */
+.pure-material-checkbox:hover > input {
+    opacity: 0.04;
+}
+
+.pure-material-checkbox > input:focus {
+    opacity: 0.12;
+}
+
+.pure-material-checkbox:hover > input:focus {
+    opacity: 0.16;
+}
+
+/* Active */
+.pure-material-checkbox > input:active {
+    opacity: 1;
+    transform: scale(0);
+    transition: transform 0s, opacity 0s;
+}
+
+.pure-material-checkbox > input:active + span::before {
+    border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-checkbox > input:checked:active + span::before {
+    border-color: transparent;
+    background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+}
+
+/* Disabled */
+.pure-material-checkbox > input:disabled {
+    opacity: 0;
+}
+
+.pure-material-checkbox > input:disabled + span {
+    color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
+    cursor: initial;
+}
+
+.pure-material-checkbox > input:disabled + span::before {
+    border-color: currentColor;
+}
+
+.pure-material-checkbox > input:checked:disabled + span::before,
+.pure-material-checkbox > input:indeterminate:disabled + span::before {
+    border-color: transparent;
+    background-color: currentColor;
+}
+</style><div class="modal-content oss">
+    
+      <div class="product-logo" style="border: 4px solid #d1f7ff;">
+        <img alt="product logo" src="/logos/krustlet-wasm.svg" class="product-logo-img">
+      </div>
+      <div class="product-tags">
+        <div class="product-badges" style="width: 300px;" >
+          <div style="
+    width: 146px;
+    marginRight: 4px;
+    height: 26px;
+    display: inline-block;
+    layout: relative;
+    overflow: hidden;
+  "><a data-type="internal" href="/?project=sandbox" class="tag tag-blue  ">
+      <span class="tag-name">CNCF</span>
+      <span class="tag-value">Sandbox Project</span>
+      </a></div>
+          <div style="
+    width: 146px;
+    marginRight: 4px;
+    height: 26px;
+    display: inline-block;
+    layout: relative;
+    overflow: hidden;
+  "></div>
+          <div style="
+    width: 146px;
+    marginRight: 4px;
+    height: 26px;
+    display: inline-block;
+    layout: relative;
+    overflow: hidden;
+  "><a data-type="internal" href="/?grouping=license&license=open-source" class="tag tag-orange  ">
+      
+      <span class="tag-value">Open Source Software</span>
+      </a></div>
+          <div style="
+    width: 146px;
+    marginRight: 4px;
+    height: 26px;
+    display: inline-block;
+    layout: relative;
+    overflow: hidden;
+  "><a data-type="internal" href="/?grouping=license&license=apache-license-2-0" class="tag tag-purple multiline ">
+      <span class="tag-name">License</span>
+      <span class="tag-value">Apache License 2.0</span>
+      </a></div>
+          <div style="
+    width: 146px;
+    marginRight: 4px;
+    height: 26px;
+    display: inline-block;
+    layout: relative;
+    overflow: hidden;
+  "><a data-type="external" target="_blank" href="https://bestpractices.coreinfrastructure.org/en/projects/5292" class="tag tag-grass">
+      <span class="tag-name">OpenSSF Best Practices</span>
+      <span class="tag-value">97%</span>
+      </a></div>
+          <div style="
+    width: 146px;
+    marginRight: 4px;
+    height: 26px;
+    display: inline-block;
+    layout: relative;
+    overflow: hidden;
+  "></div>
+          <div class="charts-desktop">
+            <div style="width: 220px; height: 120px; position: relative">
+        <div style="margin-left: 170px; width: 100px; height: 100px;">
+          <svg viewBox="0 0 100 100">
+        <g>
+          
+        <g>
+          
+      <path
+        d="
+              M50,50
+              L50,0.5
+              A49.5,49.5
+              0 1,1
+              47.18496678766721,0.5801093888962185
+              z
+            "
+        fill="#dea584"
+        stroke="#fff"
+        strokeWidth="1"
+        strokeLinejoin="round"
+      ></path>
+    
+      <path
+        d="
+              M50,50
+              L47.18496678766721,0.5801093888962185
+              A49.5,49.5
+              0 0,1
+              48.78713698778011,0.5148611872858453
+              z
+            "
+        fill="#89e051"
+        stroke="#fff"
+        strokeWidth="1"
+        strokeLinejoin="round"
+      ></path>
+    
+      <path
+        d="
+              M50,50
+              L48.78713698778011,0.5148611872858453
+              A49.5,49.5
+              0 0,1
+              50.000000000000036,0.5
+              z
+            "
+        fill="#012456"
+        stroke="#fff"
+        strokeWidth="1"
+        strokeLinejoin="round"
+      ></path>
+    
+          </g>
+  
+        </g>
+      </svg>
+        </div>
+        
+      <div style="
+        position: absolute;
+        width: 170px;
+        left: 0;
+        top: 0;
+        margin-top: -5px;
+        margin-bottom: 5px;
+        font-size: 0.8em;
+      ">
+      <div style="position: relative; margin-top: 2px; height: 12px;" >
+        <div style="display: inline-block; position: absolute; height: 12px; width: 12px; background: #dea584; top: 2px; margin-right: 4px;" ></div>
+        <div style="display: inline-block; position: relative; width: 125px; left: 16px;  white-space: nowrap; text-overflow: 'ellipsis'; overflow: hidden;">
+          <a data-type="internal" href="/?grouping=no&language=Rust">Rust 99%</a></div>
+      </div><div style="position: relative; margin-top: 2px; height: 12px;" >
+        <div style="display: inline-block; position: absolute; height: 12px; width: 12px; background: #89e051; top: 2px; margin-right: 4px;" ></div>
+        <div style="display: inline-block; position: relative; width: 125px; left: 16px;  white-space: nowrap; text-overflow: 'ellipsis'; overflow: hidden;">
+          <a data-type="internal" href="/?grouping=no&language=Shell">Shell 1%</a></div>
+      </div><div style="position: relative; margin-top: 2px; height: 12px;" >
+        <div style="display: inline-block; position: absolute; height: 12px; width: 12px; background: #012456; top: 2px; margin-right: 4px;" ></div>
+        <div style="display: inline-block; position: relative; width: 125px; left: 16px;  white-space: nowrap; text-overflow: 'ellipsis'; overflow: hidden;">
+          <a data-type="internal" href="/?grouping=no&language=PowerShell">PowerShell &lt;1%</a></div>
+      </div>
+    </div> 
+      </div>
+            <div style="width: 300px; height: 150px; position: relative;">
+      <div style="
+          position: absolute;
+          left: 20px;
+          right: 0;
+          top: 0%;
+          height: .5px;
+          background: #777;"
+          ></div>
+       <span style="
+          display: inline-block;
+          position: absolute;
+          font-size: 10px;
+          left: 5px;
+          right: 0px;
+          top: -7px;
+        ">1</span><div style="
+          position: absolute;
+          left: 20px;
+          right: 0;
+          top: 100%;
+          height: .5px;
+          background: #777;"
+          ></div>
+       <span style="
+          display: inline-block;
+          position: absolute;
+          font-size: 10px;
+          left: 5px;
+          right: 0px;
+          top: 143px;
+        ">0</span><div style="
+        position: absolute;
+        left: 25px;
+        bottom: 0;
+        top: 0;
+        width: .5px;
+        background: #777;
+      "></div>
+      <div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 24px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 29.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 35.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 40.8px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 46.4px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 52px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 57.599999999999994px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 63.199999999999996px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 68.8px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 74.4px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 80px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 85.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 91.19999999999999px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 96.8px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 102.39999999999999px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 108px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 113.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 119.19999999999999px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 124.8px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 130.39999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 136px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 141.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 147.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 152.79999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 158.39999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 164px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 169.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 175.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 180.79999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 186.39999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 192px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 197.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 203.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 208.79999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 214.39999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 220px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 225.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 231.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 236.79999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 242.39999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 248px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 253.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 259.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 264.79999999999995px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 270.4px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 276px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 281.59999999999997px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 287.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 292.79999999999995px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 298.4px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 304px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div>
+      <div style="
+        transform: rotate(-90deg);
+        position: absolute;
+        left: -24px;
+        font-size: 10px;
+        top: 59px;
+      ">Commits</div>
+      <div style="
+        font-size: 10px;
+        left: 20px;
+        bottom: -16px;
+        white-space: nowrap;
+        position: absolute;
+      "><span style="width: 30px; display: inline-block">Oct</span><span style="width: 23px; display: inline-block;" ></span><span style="width: 30px; display: inline-block">Dec</span><span style="width: 23px; display: inline-block;" ></span><span style="width: 30px; display: inline-block">Feb</span><span style="width: 23px; display: inline-block;" ></span><span style="width: 30px; display: inline-block">Apr</span><span style="width: 23px; display: inline-block;" ></span><span style="width: 30px; display: inline-block">Jun</span><span style="width: 23px; display: inline-block;" ></span><span style="width: 30px; display: inline-block">Aug</span><span style="width: 23px; display: inline-block;" ></span></div>
+    </div>
+          </div>
+        </div>
+      </div>
+    <div class="product-scroll" >
+      
+    <div class="product-main">
+        <div class="product-name">Krustlet (Wasm)</div>
+        <div class="product-parent"><a data-type=internal href="/?grouping=organization&organization=non-public-unnamed-organization">
+          <span>Non-Public Unnamed Organization</span></a></div>
+        
+          <div class="product-category"><span>
+      <a data-type="internal" href="/?category=wasm&grouping=category">Wasm</a>
+     <span class="product-category-separator" key="product-category-separator">•</span> 
+      <a data-type="internal" href="/?category=runtimes&grouping=category">Runtimes</a>
+    </span></div>
+        
+        <div class="product-description">Kubernetes Rust Kubelet</div>
+    </div>
+    <div class="product-properties">
+      <div class="product-property row">
+        <div class="product-property-name col col-20">Website</div>
+        <div class="product-property-value col col-80">
+          <a data-type=external target=_blank href="https://krustlet.dev">krustlet.dev</a>
+        </div>
+      </div>
+      <div class="product-property row">
+          <div class="product-property-name col col-20">
+            Repository
+          </div>
+          <div class="product-property-value product-repo col col-80">
+            <a data-type=external target=_blank href="https://github.com/krustlet/krustlet">github.com/krustlet/krustlet</a>
+            
+            <span class="product-repo-stars">
+              <svg viewBox="0 0 24 24">
+    <path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58
+    9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81
+    5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18
+    9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5
+    6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84
+    13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39
+    18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68
+    14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+</svg>
+
+              <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+
+              3,486
+              </span> 
+            </div>
+          </div>
+      
+      
+          <div class="product-property row">
+            <div class="product-property-name col col-20">Crunchbase</div>
+            <div class="product-property-value col col-80">
+              <a data-type=external target=_blank href="https://www.crunchbase.com/organization/cloud-native-computing-foundation">crunchbase.com/organization/cloud-native-computing-foundation</a>
+            </div>
+          </div> 
+      
+      <div class="row">
+        <div class="col col-50">
+          
+    <div class="product-property row">
+      <div class="product-property-name col col-40">Twitter</div>
+      <div class="product-property-value col col-60">
+        <a data-type="external" target="_blank" href="https://twitter.com/krustlet">@krustlet</a>
+      </div>
+   </div>
+  
+          
+    <div class="product-property row">
+      <div class="product-property-name col col-40">First Commit</div>
+      <div class="product-property-value tight-col col-60">
+        <a data-type="external" target=_blank href="https:&#x2F;&#x2F;github.com&#x2F;krustlet&#x2F;krustlet&#x2F;commit&#x2F;fbd970e76c01fb6f79a44d498ab23e1ae1fc72ad">4 years ago</a>
+      </div>
+    </div>
+  
+          
+    <div class="product-property row">
+      <div class="product-property-name col col-40">Contributors</div>
+      <div class="product-property-value tight-col col-60">
+        <a data-type="external" target=_blank href="https://github.com/krustlet/krustlet/graphs/contributors">
+          50
+        </a>
+      </div>
+    </div>
+  
+        </div>
+        <div class="col col-50">
+          
+    <div class="product-property row">
+      <div class="product-property-name col col-50">Latest Tweet</div>
+      <div class="product-property-value col col-50">
+        
+          <a data-type="external" target="_blank" href="https:&#x2F;&#x2F;twitter.com&#x2F;krustlet">2 years ago</a>
+        
+        </div>
+      </div>
+  
+          
+    <div class="product-property row">
+      <div class="product-property-name col col-50">Latest Commit</div>
+      <div class="product-property-value col col-50">
+        <a data-type="external" target=_blank href="https://github.com/krustlet/krustlet/commit/29e8a30cbb7fd99e27de061b81e297f308797653">2 years ago</a>
+      </div>
+    </div>
+  
+          
+    <div class="product-property row">
+      <div class="product-property-name col col-50">Latest Release</div>
+      <div class="product-property-value col col-50">
+        <a data-type="external" target=_blank href="https://github.com/krustlet/krustlet/releases">2 years ago</a>
+      </div>
+    </div>
+  
+        </div>
+      </div>
+      
+        <div class="product-property row">
+          <div class="product-property-name col col-20">Accepted</div>
+          <div class="product-property-name col col-80">2021-07-13</div>
+        </div>
+      
+      <div class="row">
+        <div class="col col-50">
+          
+    <div class="product-property row">
+      <div class="product-property-name col col-40">Headquarters</div>
+      <div class="product-property-value tight-col col-60">
+        <a data-type="external" target=_blank href="/?grouping=headquarters&headquarters=bouvet-island-antarctica">Bouvet Island, Antarctica</a>
+      </div>
+    </div>
+  
+          
+          
+        </div>
+        <div class="col col-50">
+          
+        </div>
+      </div>
+      
+      
+      <a href="https://clomonitor.io/projects/cncf/krustlet" target="_blank">
+        <svg
+  class="light"
+  width="450"
+  height="235"
+  viewBox="0 0 450 235"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <style>
+    .header {
+      fill: #2a0552;
+    }
+
+    .dark .header {
+      fill: #0f0e11;
+    }
+
+    .logo {
+      fill: #fff;
+    }
+
+    .clo {
+      font-family: "Arial", Gadget, sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .monitor {
+      font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif;
+      font-size: 18px;
+      font-weight: 300;
+    }
+
+    .beta {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 9px;
+      font-weight: 400;
+      fill: #fff;
+    }
+
+    .bg {
+      fill: #f9f9f9;
+    }
+
+    .dark .bg {
+      fill: #2c2e31;
+    }
+
+    .title {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .3px;
+      fill: #6c757d;
+    }
+
+    .dark .title {
+      fill: #a0a0a0;
+    }
+
+    .barBg {
+      fill: #fff;
+      stroke: #dee2e6;
+    }
+
+    .dark .barBg {
+      fill: #131216;
+      stroke: #676869;
+    }
+
+    .valueBg {
+      fill: #dee2e6;
+      stroke: #dee2e6;
+    }
+
+    .dark .valueBg {
+      fill: #2b2a2e;
+      stroke: #676869;
+    }
+
+    .value {
+      font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      font-size: 12px;
+      font-weight: 600;
+      fill: #38383f;
+    }
+
+    .dark .value {
+      fill: #a3a3a6;
+    }
+
+    .barWrapper {
+      fill: #dee2e6;
+    }
+
+    .dark .barWrapper {
+      fill: #2b2a2e;
+    }
+
+    .bar-a {
+      fill: #90be6d;
+    }
+
+    .bar-b {
+      fill: #f9c74f;
+    }
+
+    .bar-c {
+      fill: #f8961e;
+    }
+
+    .bar-d {
+      fill: #f94144;
+    }
+
+    .empty-icon {
+      stroke: #6c757d;
+    }
+
+    .dark .empty-icon {
+      stroke: #a0a0a0;
+    }
+
+    .icon {
+      stroke: #6c757d;
+      fill: #6c757d;
+    }
+
+    .dark .icon {
+      stroke: #a0a0a0;
+      fill: #a0a0a0;
+    }
+
+    @supports(-moz-appearance: auto) {
+      /* Selector detects Firefox */
+      .value { font-size:12px; }
+    }
+
+    .circle {
+      fill: #fff;
+      stroke: #e2e2e2;
+    }
+
+    .dark .circle {
+      fill: #131216;
+      stroke: #676869;
+    }
+
+    .chart-circle {
+      fill: none;
+      stroke-dashoffset: 251.42;
+    }
+
+    .circle-a {
+      stroke: #90be6d;
+    }
+
+    .circle-b {
+      stroke: #f9c74f;
+    }
+
+    .circle-c {
+      stroke: #f8961e;
+    }
+
+    .circle-d {
+      stroke: #f94144;
+    }
+
+    .global {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 34px;
+      font-weight: 400;
+      fill: #38383f;
+    }
+
+    .dark .global {
+      fill: #a3a3a6;
+    }
+  </style>
+
+  <!-- Header start -->
+
+  <rect
+    x="0"
+    y="0"
+    class="header"
+    height="50"
+    width="450"
+  />
+
+  <!-- Logo -->
+
+  <g transform="translate(18, 32)">
+    <svg y="-19px" viewBox="0 0 580 75" height="25" width="152">
+      <g id="layer0">
+        <g transform="matrix(1 0 0 1 10 0.108586)">
+          <path d="M108.899,52.1547C114.39,52.1547 118.717,49.9914 122.211,45.6648L129.367,52.9868C123.709,59.3103 117.219,62.4721 109.564,62.4721C101.91,62.4721 95.7524,60.1423 90.7602,55.3165C85.7679,50.4906 83.4382,44.4999 83.4382,37.178C83.4382,29.856 85.9343,23.6988 90.9266,18.873C95.9189,14.0471 102.076,11.551 109.398,11.551C117.552,11.551 124.375,14.7128 129.7,20.8699L122.877,28.6911C119.382,24.3645 115.056,22.2012 109.897,22.2012C105.737,22.2012 102.242,23.5324 99.247,26.195C96.2517,28.8575 94.754,32.5185 94.754,37.178C94.754,41.8374 96.0853,45.4984 98.9142,48.3273C101.577,50.6571 104.905,52.1547 108.899,52.1547L108.899,52.1547Z" fill="#FFFFFF"/>
+          <path d="M138.02,61.8064L138.02,12.3831L149.003,12.3831L149.003,51.9883L170.137,51.9883L170.137,61.8064L138.02,61.8064L138.02,61.8064Z" fill="#FFFFFF"/>
+          <path d="M218.396,54.9837C213.403,59.8095 207.246,62.3057 199.924,62.3057C192.602,62.3057 186.445,59.8095 181.453,54.9837C176.461,50.1578 173.965,44.0007 173.965,36.8451C173.965,29.5232 176.461,23.5324 181.453,18.7066C186.445,13.8807 192.602,11.3846 199.924,11.3846C207.246,11.3846 213.403,13.8807 218.396,18.7066C223.388,23.5324 225.884,29.6896 225.884,36.8451C225.884,44.1671 223.388,50.1578 218.396,54.9837L218.396,54.9837ZM214.568,36.8451C214.568,32.5185 213.071,28.6911 210.242,25.5293C207.413,22.3676 203.918,20.8699 199.758,20.8699C195.598,20.8699 192.103,22.3676 189.274,25.5293C186.445,28.6911 184.947,32.3521 184.947,36.8451C184.947,41.1718 186.445,44.9992 189.274,48.1609C192.103,51.3227 195.598,52.8204 199.758,52.8204C203.918,52.8204 207.413,51.3227 210.242,48.1609C213.237,44.9992 214.568,41.3382 214.568,36.8451L214.568,36.8451Z" fill="#FFFFFF"/>
+        </g>
+      </g>
+      <g id="layer1">
+        <g>
+          <path d="M15.5,47.7L6.4,47.7L6.4,69.1L27.7,69.1L27.7,59.9L15.5,59.9L15.5,47.7Z" fill="#FFFFFF"/>
+          <path d="M61.3,47.8L61.3,59.9L49.1,59.9L49.1,59.8L49.1,69.1L70.4,69.1L70.4,47.7L61.2,47.7L61.3,47.8Z" fill="#FFFFFF"/>
+          <path d="M6.4,26.4L15.6,26.4L15.5,26.3L15.5,14.2L27.7,14.2L27.7,5L6.4,5L6.4,26.4Z" fill="#FFFFFF"/>
+          <path d="M49.1,5L49.1,14.2L61.3,14.2L61.3,26.4L70.4,26.4L70.4,5L49.1,5Z" fill="#FFFFFF"/>
+        </g>
+        <g>
+          <path d="M42.8587,21.3587L35.7,14.2L49.1,14.2L49.1,5L27.7,5L27.7,14.2L34.8587,21.3587L42.8587,21.3587Z" fill="#FFFFFF" fill-opacity="0.5"/>
+          <path d="M41.441,52.241L33.441,52.241L39,57.8L41,59.9L27.7,59.9L27.7,69.1L49.1,69.1L49.1,59.8L43,53.8L41.441,52.241Z" fill="#FFFFFF" fill-opacity="0.5"/>
+          <path d="M61.3,26.4L61.3,39.7L59.2,37.6L53.6543,32.0543L53.6543,40.1543L55.1,41.6L61.2,47.7L70.4,47.7L70.4,26.4L61.3,26.4Z" fill="#FFFFFF" fill-opacity="0.5"/>
+          <path d="M23.6745,34.4745L15.6,26.4L6.4,26.4L6.4,47.7L15.5,47.7L15.5,34.4L23.6745,42.5745L23.6745,34.4745Z" fill="#FFFFFF" fill-opacity="0.5"/>
+        </g>
+      </g>
+      <g id="layer2">
+        <path d="M38.4,18.8747C28.362,18.8747 20.2247,27.012 20.2247,37.05C20.2247,47.088 28.362,55.2253 38.4,55.2253C48.438,55.2253 56.5753,47.088 56.5753,37.05C56.5753,27.012 48.438,18.8747 38.4,18.8747L38.4,18.8747ZM38.4,22.3925C46.5006,22.3925 53.0575,28.9481 53.0575,37.05C53.0575,45.1506 46.5019,51.7075 38.4,51.7075C30.2994,51.7075 23.7425,45.1519 23.7425,37.05C23.7425,28.9494 30.2981,22.3925 38.4,22.3925L38.4,22.3925ZM48.6752,31.9394L47.0236,30.2745C46.6816,29.9297 46.1247,29.9274 45.7799,30.2695L35.4206,40.5456L31.0386,36.128C30.6965,35.7832 30.1397,35.781 29.7949,36.123L28.1299,37.7746C27.7851,38.1166 27.7828,38.6735 28.1249,39.0184L34.778,45.7253C35.12,46.0701 35.6769,46.0724 36.0217,45.7303L48.6703,33.1832C49.015,32.8411 49.0172,32.2843 48.6752,31.9394L48.6752,31.9394Z" fill="#FFFFFF"/>
+      </g>
+      <g id="layer3">
+        <g transform="matrix(1 0 0 1 13 0)">
+          <path d="M237.78,62.1077L237.78,12.0003L247.761,12.0003L259.621,47.4788C260.715,50.7829 261.512,53.2552 262.014,54.8958C262.583,53.0729 263.472,50.3955 264.68,46.8636L276.677,12.0003L285.597,12.0003L285.597,62.1077L279.206,62.1077L279.206,20.1693L264.645,62.1077L258.664,62.1077L244.172,19.4515L244.172,62.1077L237.78,62.1077Z" fill="#FFFFFF" fill-opacity="0.7"/>
+          <path d="M294.279,37.7034C294.279,29.3864 296.512,22.8751 300.978,18.1697C305.445,13.4643 311.209,11.1116 318.273,11.1116C322.899,11.1116 327.069,12.2168 330.783,14.4271C334.497,16.6374 337.328,19.7192 339.277,23.6727C341.225,27.6261 342.199,32.1094 342.199,37.1224C342.199,42.2038 341.174,46.7497 339.123,50.7601C337.072,54.7705 334.167,57.8068 330.407,59.869C326.647,61.9311 322.591,62.9622 318.239,62.9622C313.522,62.9622 309.307,61.8229 305.593,59.5443C301.878,57.2656 299.064,54.1553 297.15,50.2132C295.236,46.2711 294.279,42.1012 294.279,37.7034L294.279,37.7034ZM301.115,37.806C301.115,43.8444 302.739,48.6011 305.986,52.076C309.233,55.5509 313.306,57.2884 318.205,57.2884C323.195,57.2884 327.302,55.5338 330.527,52.0247C333.751,48.5156 335.363,43.5368 335.363,37.0882C335.363,33.0094 334.674,29.449 333.295,26.407C331.917,23.3651 329.9,21.0067 327.245,19.3318C324.591,17.657 321.611,16.8196 318.307,16.8196C313.613,16.8196 309.575,18.4318 306.191,21.6561C302.807,24.8804 301.115,30.2637 301.115,37.806L301.115,37.806Z" fill="#FFFFFF" fill-opacity="0.7"/>
+          <path d="M350.676,62.1077L350.676,12.0003L357.477,12.0003L383.796,51.3411L383.796,12.0003L390.153,12.0003L390.153,62.1077L383.351,62.1077L357.033,22.7327L357.033,62.1077L350.676,62.1077Z" fill="#FFFFFF" fill-opacity="0.7"/>
+          <path d="M402.424,62.1077L402.424,12.0003L409.055,12.0003L409.055,62.1077L402.424,62.1077Z" fill="#FFFFFF" fill-opacity="0.7"/>
+          <path d="M433.493,62.1077L433.493,17.9134L416.984,17.9134L416.984,12.0003L456.701,12.0003L456.701,17.9134L440.124,17.9134L440.124,62.1077L433.493,62.1077Z" fill="#FFFFFF" fill-opacity="0.7"/>
+          <path d="M460.222,37.7034C460.222,29.3864 462.455,22.8751 466.921,18.1697C471.387,13.4643 477.152,11.1116 484.216,11.1116C488.841,11.1116 493.011,12.2168 496.725,14.4271C500.44,16.6374 503.271,19.7192 505.219,23.6727C507.167,27.6261 508.141,32.1094 508.141,37.1224C508.141,42.2038 507.116,46.7497 505.065,50.7601C503.014,54.7705 500.109,57.8068 496.349,59.869C492.59,61.9311 488.534,62.9622 484.181,62.9622C479.465,62.9622 475.249,61.8229 471.535,59.5443C467.821,57.2656 465.007,54.1553 463.093,50.2132C461.179,46.2711 460.222,42.1012 460.222,37.7034L460.222,37.7034ZM467.057,37.806C467.057,43.8444 468.681,48.6011 471.928,52.076C475.175,55.5509 479.248,57.2884 484.147,57.2884C489.138,57.2884 493.245,55.5338 496.469,52.0247C499.693,48.5156 501.305,43.5368 501.305,37.0882C501.305,33.0094 500.616,29.449 499.238,26.407C497.859,23.3651 495.842,21.0067 493.188,19.3318C490.533,17.657 487.554,16.8196 484.25,16.8196C479.556,16.8196 475.517,18.4318 472.133,21.6561C468.749,24.8804 467.057,30.2637 467.057,37.806L467.057,37.806Z" fill="#FFFFFF" fill-opacity="0.7"/>
+          <path d="M516.789,62.1077L516.789,12.0003L539.006,12.0003C543.472,12.0003 546.867,12.4503 549.191,13.3504C551.515,14.2505 553.373,15.8398 554.763,18.1185C556.153,20.3971 556.847,22.915 556.847,25.6722C556.847,29.2269 555.697,32.2233 553.395,34.6614C551.094,37.0996 547.539,38.6491 542.731,39.3099C544.486,40.153 545.819,40.9847 546.73,41.805C548.667,43.5823 550.501,45.804 552.233,48.47L560.949,62.1077L552.609,62.1077L545.978,51.6829C544.042,48.6751 542.446,46.3737 541.193,44.7786C539.94,43.1836 538.818,42.067 537.826,41.429C536.835,40.791 535.827,40.3467 534.802,40.096C534.05,39.9365 532.819,39.8568 531.11,39.8568L523.42,39.8568L523.42,62.1077L516.789,62.1077ZM523.42,34.1146L537.673,34.1146C540.703,34.1146 543.073,33.8013 544.782,33.1746C546.491,32.548 547.79,31.5454 548.679,30.1668C549.567,28.7882 550.012,27.29 550.012,25.6722C550.012,23.3024 549.151,21.3541 547.431,19.8275C545.711,18.3008 542.993,17.5374 539.279,17.5374L523.42,17.5374L523.42,34.1146Z" fill="#FFFFFF" fill-opacity="0.7"/>
+        </g>
+      </g>
+    </svg>
+  </g>
+
+  <!-- Header end -->
+
+  <!-- Body start -->
+
+  <rect
+    x="0"
+    y="50"
+    class="bg"
+    height="185"
+    width="450"
+  />
+
+  <!-- Global -->
+  <g transform="translate(23, 96)">
+    <g>
+      <circle class="circle" cx="45" cy="45" r="40" stroke-width="5" />
+      <circle class="chart-circle circle-b" cx="45" cy="45" r="40" stroke-width="5" stroke-dasharray="395.4627083333333" transform="rotate(-90 45 45)" />
+    </g>
+
+    <g class="global">
+      <text x="45" y="57" text-anchor="middle" color="#38383f">57</text>
+    </g>
+  </g>
+
+  <!-- Documentation -->
+
+  <g transform="translate(135, 80)">
+    <g>
+      <rect
+        x="0"
+        y="0"
+        class="barBg"
+        height="18"
+        width="290"
+        stroke-opacity="1"
+      />
+
+      <g class="title" transform="translate(5, 0)">
+        <svg y="3" class="empty-icon" fill="none" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+        </svg>
+
+        <text x="16" y="13">Documentation</text>
+      </g>
+
+      <rect
+        x="135"
+        y="0"
+        class="valueBg"
+        height="18"
+        width="30"
+        stroke-opacity="1"
+      />
+
+      <g class="value">
+        <text x="150" y="13" text-anchor="middle">77</text>
+      </g>
+
+      <g transform="translate(175, 7)">
+        <rect
+          x="0"
+          y="0"
+          height="4"
+          width="106"
+          class="barWrapper"
+        />
+
+        <rect
+          x="0"
+          y="0"
+          height="4"
+          width="81"
+          class="bar-a"
+        />
+      </g>
+    </g>
+  </g>
+
+  <!-- License -->
+
+  <g transform="translate(135, 106)">
+    <g>
+      <rect
+        x="0"
+        y="0"
+        class="barBg"
+        height="18"
+        width="290"
+        stroke-opacity="1"
+      />
+
+      <g class="title" transform="translate(5, 0)">
+        <svg y="3" class="icon" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+          <path d="M256 32c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128S326.7 32 256 32zm0 208c-44.2 0-80-35.8-80-80s35.8-80 80-80 80 35.8 80 80-35.8 80-80 80zM193.7 307.4c-19.1-8.1-36.2-19.6-50.8-34.3-1.4-1.4-2.8-2.8-4.1-4.3L64 400h96l48 80 48-105.8 25.5-56.2c-8.4 1.3-16.9 2-25.5 2-21.6 0-42.5-4.2-62.3-12.6zM373.3 268.9c-1.3 1.4-2.7 2.9-4.1 4.3-14.6 14.6-31.7 26.2-50.7 34.2L294 361.2l-21.9 48.4L304 480l48-80h96l-74.7-131.1z" />
+        </svg>
+
+        <text x="16" y="13">License</text>
+      </g>
+
+      <rect
+        x="135"
+        y="0"
+        class="valueBg"
+        height="18"
+        width="30"
+        stroke-opacity="1"
+      />
+
+      <g class="value">
+        <text x="150" y="13" text-anchor="middle">75</text>
+      </g>
+
+      <g transform="translate(175, 7)">
+        <rect
+          x="0"
+          y="0"
+          height="4"
+          width="106"
+          class="barWrapper"
+        />
+
+        <rect
+          x="0"
+          y="0"
+          height="4"
+          width="80"
+          class="bar-a"
+        />
+      </g>
+    </g>
+  </g>
+
+  <!-- Best practices -->
+
+  <g transform="translate(135, 132)">
+    <g>
+      <rect
+        x="0"
+        y="0"
+        class="barBg"
+        height="18"
+        width="290"
+        stroke-opacity="1"
+      />
+
+      <g class="title" transform="translate(5, 0)">
+        <svg y="3" class="icon" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path d="M5 4.604v9.185a4 4 0 0 0 1.781 3.328L12 20.597l5.219-3.48A4 4 0 0 0 19 13.79V4.604L12 3.05 5 4.604zM3.783 2.826L12 1l8.217 1.826a1 1 0 0 1 .783.976v9.987a6 6 0 0 1-2.672 4.992L12 23l-6.328-4.219A6 6 0 0 1 3 13.79V3.802a1 1 0 0 1 .783-.976zM12 13.5l-2.939 1.545.561-3.272-2.377-2.318 3.286-.478L12 6l1.47 2.977 3.285.478-2.377 2.318.56 3.272L12 13.5z"></path>
+          </g>
+        </svg>
+
+        <text x="16" y="13">Best Practices</text>
+      </g>
+
+      <rect
+        x="135"
+        y="0"
+        class="valueBg"
+        height="18"
+        width="30"
+        stroke-opacity="1"
+      />
+
+      <g class="value">
+        <text x="150" y="13" text-anchor="middle">53</text>
+      </g>
+
+      <g transform="translate(175, 7)">
+        <rect
+          x="0"
+          y="0"
+          height="4"
+          width="106"
+          class="barWrapper"
+        />
+
+        <rect
+          x="0"
+          y="0"
+          height="4"
+          width="56"
+          class="bar-b"
+        />
+      </g>
+    </g>
+  </g>
+
+  <!-- Security -->
+
+  <g transform="translate(135, 158)">
+    <g>
+      <rect
+        x="0"
+        y="0"
+        class="barBg"
+        height="18"
+        width="290"
+        stroke-opacity="1"
+      />
+
+      <g class="title" transform="translate(5, 0)">
+        <svg y="3" class="icon" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C9.243 2 7 4.243 7 7v2H6c-1.103 0-2 .897-2 2v9c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-9c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v2H9V7zm9.002 13H13v-2.278c.595-.347 1-.985 1-1.722 0-1.103-.897-2-2-2s-2 .897-2 2c0 .736.405 1.375 1 1.722V20H6v-9h12l.002 9z" />
+        </svg>
+
+        <text x="16" y="13">Security</text>
+      </g>
+
+      <rect
+        x="135"
+        y="0"
+        class="valueBg"
+        height="18"
+        width="30"
+        stroke-opacity="1"
+      />
+
+      <g class="value">
+        <text x="150" y="13" text-anchor="middle">32</text>
+      </g>
+
+     <g transform="translate(175, 7)">
+        <rect
+          x="0"
+          y="0"
+          height="4"
+          width="106"
+          class="barWrapper"
+        />
+
+        <rect
+          x="0"
+          y="0"
+          height="4"
+          width="34"
+          class="bar-c"
+        />
+      </g>
+    </g>
+  </g>
+
+  <!-- Legal -->
+
+  <g transform="translate(135, 184)">
+    <g>
+      <rect
+        x="0"
+        y="0"
+        class="barBg"
+        height="18"
+        width="290"
+        stroke-opacity="1"
+      />
+
+      <g class="title" transform="translate(5, 0)">
+        <svg y="3" class="icon" stroke-width="0" viewBox="0 0 14 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M7 4c-.83 0-1.5-.67-1.5-1.5S6.17 1 7 1s1.5.67 1.5 1.5S7.83 4 7 4zm7 6c0 1.11-.89 2-2 2h-1c-1.11 0-2-.89-2-2l2-4h-1c-.55 0-1-.45-1-1H8v8c.42 0 1 .45 1 1h1c.42 0 1 .45 1 1H3c0-.55.58-1 1-1h1c0-.55.58-1 1-1h.03L6 5H5c0 .55-.45 1-1 1H3l2 4c0 1.11-.89 2-2 2H2c-1.11 0-2-.89-2-2l2-4H1V5h3c0-.55.45-1 1-1h4c.55 0 1 .45 1 1h3v1h-1l2 4zM2.5 7L1 10h3L2.5 7zM13 10l-1.5-3-1.5 3h3z" />
+        </svg>
+
+        <text x="16" y="13">Legal</text>
+      </g>
+
+      <rect
+        x="135"
+        y="0"
+        class="valueBg"
+        height="18"
+        width="30"
+        stroke-opacity="1"
+      />
+
+      <g class="value">
+        <text x="150" y="13" text-anchor="middle">0</text>
+      </g>
+
+      <g transform="translate(175, 7)">
+        <rect
+          x="0"
+          y="0"
+          height="4"
+          width="106"
+          class="barWrapper"
+        />
+
+        <rect
+          x="0"
+          y="0"
+          height="4"
+          width="2"
+          class="bar-d"
+        />
+      </g>
+    </g>
+  </g>
+
+  <!-- Body end -->
+</svg>
+      </a>
+    
+      </div>
+  
+      <div class="charts-mobile">
+        <div style="width: 220px; height: 120px; position: relative">
+        <div style="margin-left: 170px; width: 100px; height: 100px;">
+          <svg viewBox="0 0 100 100">
+        <g>
+          
+        <g>
+          
+      <path
+        d="
+              M50,50
+              L50,0.5
+              A49.5,49.5
+              0 1,1
+              47.18496678766721,0.5801093888962185
+              z
+            "
+        fill="#dea584"
+        stroke="#fff"
+        strokeWidth="1"
+        strokeLinejoin="round"
+      ></path>
+    
+      <path
+        d="
+              M50,50
+              L47.18496678766721,0.5801093888962185
+              A49.5,49.5
+              0 0,1
+              48.78713698778011,0.5148611872858453
+              z
+            "
+        fill="#89e051"
+        stroke="#fff"
+        strokeWidth="1"
+        strokeLinejoin="round"
+      ></path>
+    
+      <path
+        d="
+              M50,50
+              L48.78713698778011,0.5148611872858453
+              A49.5,49.5
+              0 0,1
+              50.000000000000036,0.5
+              z
+            "
+        fill="#012456"
+        stroke="#fff"
+        strokeWidth="1"
+        strokeLinejoin="round"
+      ></path>
+    
+          </g>
+  
+        </g>
+      </svg>
+        </div>
+        
+      <div style="
+        position: absolute;
+        width: 170px;
+        left: 0;
+        top: 0;
+        margin-top: -5px;
+        margin-bottom: 5px;
+        font-size: 0.8em;
+      ">
+      <div style="position: relative; margin-top: 2px; height: 12px;" >
+        <div style="display: inline-block; position: absolute; height: 12px; width: 12px; background: #dea584; top: 2px; margin-right: 4px;" ></div>
+        <div style="display: inline-block; position: relative; width: 125px; left: 16px;  white-space: nowrap; text-overflow: 'ellipsis'; overflow: hidden;">
+          <a data-type="internal" href="/?grouping=no&language=Rust">Rust 99%</a></div>
+      </div><div style="position: relative; margin-top: 2px; height: 12px;" >
+        <div style="display: inline-block; position: absolute; height: 12px; width: 12px; background: #89e051; top: 2px; margin-right: 4px;" ></div>
+        <div style="display: inline-block; position: relative; width: 125px; left: 16px;  white-space: nowrap; text-overflow: 'ellipsis'; overflow: hidden;">
+          <a data-type="internal" href="/?grouping=no&language=Shell">Shell 1%</a></div>
+      </div><div style="position: relative; margin-top: 2px; height: 12px;" >
+        <div style="display: inline-block; position: absolute; height: 12px; width: 12px; background: #012456; top: 2px; margin-right: 4px;" ></div>
+        <div style="display: inline-block; position: relative; width: 125px; left: 16px;  white-space: nowrap; text-overflow: 'ellipsis'; overflow: hidden;">
+          <a data-type="internal" href="/?grouping=no&language=PowerShell">PowerShell &lt;1%</a></div>
+      </div>
+    </div> 
+      </div>
+        <div style="width: 300px; height: 150px; position: relative;">
+      <div style="
+          position: absolute;
+          left: 20px;
+          right: 0;
+          top: 0%;
+          height: .5px;
+          background: #777;"
+          ></div>
+       <span style="
+          display: inline-block;
+          position: absolute;
+          font-size: 10px;
+          left: 5px;
+          right: 0px;
+          top: -7px;
+        ">1</span><div style="
+          position: absolute;
+          left: 20px;
+          right: 0;
+          top: 100%;
+          height: .5px;
+          background: #777;"
+          ></div>
+       <span style="
+          display: inline-block;
+          position: absolute;
+          font-size: 10px;
+          left: 5px;
+          right: 0px;
+          top: 143px;
+        ">0</span><div style="
+        position: absolute;
+        left: 25px;
+        bottom: 0;
+        top: 0;
+        width: .5px;
+        background: #777;
+      "></div>
+      <div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 24px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 29.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 35.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 40.8px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 46.4px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 52px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 57.599999999999994px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 63.199999999999996px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 68.8px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 74.4px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 80px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 85.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 91.19999999999999px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 96.8px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 102.39999999999999px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 108px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 113.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 119.19999999999999px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 124.8px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 130.39999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 136px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 141.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 147.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 152.79999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 158.39999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 164px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 169.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 175.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 180.79999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 186.39999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 192px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 197.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 203.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 208.79999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 214.39999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 220px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 225.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 231.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 236.79999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 242.39999999999998px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 248px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 253.6px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 259.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 264.79999999999995px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 270.4px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 276px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 281.59999999999997px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 287.2px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 292.79999999999995px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 298.4px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div><div style="
+        position: absolute;
+        bottom: 0;
+        top: 0px;
+        left: 304px;
+        width: 4px;
+        background: #00F;
+        border: 1px solid #777;
+      " ></div>
+      <div style="
+        transform: rotate(-90deg);
+        position: absolute;
+        left: -24px;
+        font-size: 10px;
+        top: 59px;
+      ">Commits</div>
+      <div style="
+        font-size: 10px;
+        left: 20px;
+        bottom: -16px;
+        white-space: nowrap;
+        position: absolute;
+      "><span style="width: 30px; display: inline-block">Oct</span><span style="width: 23px; display: inline-block;" ></span><span style="width: 30px; display: inline-block">Dec</span><span style="width: 23px; display: inline-block;" ></span><span style="width: 30px; display: inline-block">Feb</span><span style="width: 23px; display: inline-block;" ></span><span style="width: 30px; display: inline-block">Apr</span><span style="width: 23px; display: inline-block;" ></span><span style="width: 30px; display: inline-block">Jun</span><span style="width: 23px; display: inline-block;" ></span><span style="width: 30px; display: inline-block">Aug</span><span style="width: 23px; display: inline-block;" ></span></div>
+    </div>
+      </div>
+      <div class="twitter-timeline">
+          <a class="twitter-timeline" aria-hidden="true" data-tweet-limit="5" href="https://twitter.com/krustlet"></a>
+        </div>
+    </div>
+  </div>
